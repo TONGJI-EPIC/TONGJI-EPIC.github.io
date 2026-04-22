@@ -43,8 +43,8 @@
           <span data-lang="en" class="hidden">Publications</span>
         </h2>
         <p class="section-subtitle">
-          <span data-lang="zh">按年份倒序排列，采用 GB/T 7714-2015 格式</span>
-          <span data-lang="en" class="hidden">Listed in reverse chronological order (GB/T 7714-2015 format)</span>
+          <span data-lang="zh">代表论文列表</span>
+          <span data-lang="en" class="hidden">Selected Publications</span>
         </p>
         <div class="section-divider"></div>
       </div>
@@ -268,25 +268,40 @@
     (function () {
       'use strict';
 
-      /* ---------- BibTeX Parser ---------- */
+      /* ---------- BibTeX Parser (no dotAll flag for max compatibility) ---------- */
       function parseBibtex(text) {
         const entries = [];
-        // Match @type{citekey, ... } blocks (non-greedy, handles nested braces roughly)
-        const regex = /@(\w+)\s*\{\s*([^,\s]+)\s*,\s*([^@]*)\}/gs;
-        let match;
-        while ((match = regex.exec(text)) !== null) {
-          const entryType = match[1].toLowerCase();
-          const citekey = match[2].trim();
-          const body = match[3];
-          const fields = {};
+        let i = 0;
+        while (i < text.length) {
+          const atIdx = text.indexOf('@', i);
+          if (atIdx === -1) break;
+          const braceOpen = text.indexOf('{', atIdx);
+          const comma = text.indexOf(',', braceOpen);
+          if (braceOpen === -1 || comma === -1) break;
 
-          // Parse key = {value} or key = "value" or key = number
-          const fieldRegex = /(\w+)\s*=\s*(\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}|"[^"]*"|\d+)/gs;
+          const entryType = text.slice(atIdx + 1, braceOpen).trim().toLowerCase();
+          const citekey = text.slice(braceOpen + 1, comma).trim();
+
+          // Find matching closing brace
+          let braceCount = 1;
+          let j = comma + 1;
+          while (j < text.length && braceCount > 0) {
+            if (text[j] === '{') braceCount++;
+            else if (text[j] === '}') braceCount--;
+            j++;
+          }
+          if (braceCount !== 0) break;
+
+          const body = text.slice(comma + 1, j - 1);
+          i = j;
+
+          // Parse fields: key = {value} or key = "value"
+          const fields = {};
+          const fieldRegex = /(\w+)\s*=\s*(\{[^{}]*\}|"[^"]*")/g;
           let fm;
           while ((fm = fieldRegex.exec(body)) !== null) {
             const key = fm[1].toLowerCase().trim();
             let val = fm[2].trim();
-            // Strip outer braces or quotes
             if ((val.startsWith('{') && val.endsWith('}')) || (val.startsWith('"') && val.endsWith('"'))) {
               val = val.slice(1, -1);
             }
@@ -446,28 +461,9 @@
         });
       }
 
-      /* ---------- Load BibTeX ---------- */
-      function loadBibtex() {
-        // Try to fetch Papers.bib first (works when served via HTTP server)
-        fetch('Papers.bib')
-          .then(r => {
-            if (!r.ok) throw new Error('Failed to load Papers.bib');
-            return r.text();
-          })
-          .then(text => {
-            window.bibtexLoaded = text;
-            renderPubs('all');
-          })
-          .catch(() => {
-            // Fallback to embedded bibtex source
-            window.bibtexLoaded = null;
-            renderPubs('all');
-          });
-      }
-
       /* ---------- Init ---------- */
       document.addEventListener('DOMContentLoaded', () => {
-        loadBibtex();
+        renderPubs('all');
         initFilters();
       });
     })();
