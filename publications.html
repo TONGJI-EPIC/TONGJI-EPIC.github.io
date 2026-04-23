@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Publications | EPIC Lab</title>
   <meta name="description" content="Publications of EPIC Lab, Tongji University">
+  <link rel="canonical" href="https://tongji-epic.github.io/publications.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EPIC Lab">
+  <meta property="og:title" content="Publications | EPIC Lab">
+  <meta property="og:description" content="Selected publications from EPIC Lab at Tongji University">
+  <meta property="og:url" content="https://tongji-epic.github.io/publications.html">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,10 +32,10 @@
           <span data-lang="zh">活动</span><span data-lang="en" class="hidden">Activities</span>
         </a>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="navbar-actions">
+        <button type="button" class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-controls="navbarLinks" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
@@ -51,111 +59,124 @@
 
       <!-- Filters -->
       <div class="pub-filters">
-        <button class="filter-btn active" data-filter="all">
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
           <span data-lang="zh">全部</span><span data-lang="en" class="hidden">All</span>
         </button>
-        <button class="filter-btn" data-filter="journal">Journal</button>
-        <button class="filter-btn" data-filter="conference">Conference</button>
-        <button class="filter-btn" data-filter="survey">Survey</button>
+        <button type="button" class="filter-btn" data-filter="journal" aria-pressed="false">
+          <span data-lang="zh">期刊</span><span data-lang="en" class="hidden">Journal</span>
+        </button>
+        <button type="button" class="filter-btn" data-filter="conference" aria-pressed="false">
+          <span data-lang="zh">会议</span><span data-lang="en" class="hidden">Conference</span>
+        </button>
+        <button type="button" class="filter-btn" data-filter="survey" aria-pressed="false">
+          <span data-lang="zh">综述</span><span data-lang="en" class="hidden">Survey</span>
+        </button>
       </div>
 
-      <!-- Publication List (static HTML generated from Papers.bib) -->
+      <!-- Publication list maintained alongside Papers.bib and checked by tests. -->
       <div class="pub-list" id="pubList">
         <div class="pub-year-group" data-year="2026">
           <h3 class="pub-year-title">2026</h3>
           <div class="pub-item" data-type="survey">
-            <div class="pub-text">J. Liu, et al., <strong class="author-bold">Y. Liu*</strong>, et al.. Edge-cloud collaborative computing on distributed intelligence and model optimization: A survey[J]. IEEE Communications Surveys &amp; Tutorials, 2026.</div>
+            <div class="pub-text">J. Liu, et al., <strong class="author-bold">Y. Liu*</strong>, et al. Edge-cloud collaborative computing on distributed intelligence and model optimization: A survey[J]. IEEE Communications Surveys &amp; Tutorials, 2026.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=46.7</span>
-              <span class="pub-tag esi">通讯作者</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
             </div>
           </div>
           <div class="pub-item" data-type="conference">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, B. Chen, Y. Meng, J. Liu, Z. Guo, W. Zhou, P. Sun, H. Chen.. Motion Semantics Guided Normalizing Flow for Privacy-Preserving Video Anomaly Detection[C]. IEEE International Conference on Multimedia and Expo, 2026.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, B. Chen, Y. Meng, J. Liu, Z. Guo, W. Zhou, P. Sun, H. Chen. Motion Semantics Guided Normalizing Flow for Privacy-Preserving Video Anomaly Detection[C]. IEEE International Conference on Multimedia and Expo, 2026.</div>
           </div>
           <div class="pub-item" data-type="journal">
-            <div class="pub-text">B. Chen, L. Cao, W. Liu, J. Liu, B. Zhao, <strong class="author-bold">Y. Liu*</strong>.. Cross-modal attention fusion of RGB and skeleton for multimodal-driven video anomaly detection[J]. Pattern Recognition, 2026.</div>
+            <div class="pub-text">B. Chen, L. Cao, W. Liu, J. Liu, B. Zhao, <strong class="author-bold">Y. Liu*</strong>. Cross-modal attention fusion of RGB and skeleton for multimodal-driven video anomaly detection[J]. Pattern Recognition, 2026.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=7.6</span>
-              <span class="pub-tag esi">通讯作者</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
+            </div>
+          </div>
+          <div class="pub-item" data-type="survey">
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, S. Liu, X. Zhu, et al. Privacy-Preserving Video Anomaly Detection: A Survey[J]. IEEE Transactions on Neural Networks and Learning Systems, 2026, 37(1): 2-21.</div>
+            <div class="pub-tags">
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag highlight">IF=8.9</span>
+            </div>
+          </div>
+          <div class="pub-item" data-type="journal">
+            <div class="pub-text">J. Xue, Q. Deng, X. Wu, K. Yao, X. Yin, F. Yu, W. Zhou, Y. Zhong, <strong class="author-bold">Y. Liu*</strong>, D. Yang. Toward Comprehensive Interactive Change Understanding in Remote Sensing: A Large-Scale Dataset and Dual-Granularity Enhanced VLM[J]. IEEE Transactions on Geoscience and Remote Sensing, 2026, 64: 1-16.</div>
+            <div class="pub-tags">
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag highlight">IF=8.6</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
+            </div>
+          </div>
+          <div class="pub-item" data-type="journal">
+            <div class="pub-text">D. Yang, et al., <strong class="author-bold">Y. Liu*</strong>, et al. MedAide: Information Fusion and Anatomy of Medical Intents via LLM-based Agent Collaboration[J]. Information Fusion, 2026, 127: 103743.</div>
+            <div class="pub-tags">
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag highlight">IF=15.5</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
+            </div>
+          </div>
+          <div class="pub-item" data-type="journal">
+            <div class="pub-text">Z. Li, et al., <strong class="author-bold">Y. Liu*</strong>, et al. STNMamba: Mamba-based Spatial-Temporal Normality Learning for Video Anomaly Detection[J]. IEEE Transactions on Multimedia, 2026: 1-12.</div>
+            <div class="pub-tags">
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag ccf">CCF A</span>
+              <span class="pub-tag highlight">IF=9.7</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
             </div>
           </div>
         </div>
         <div class="pub-year-group" data-year="2025">
           <h3 class="pub-year-title">2025</h3>
           <div class="pub-item" data-type="journal">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, H. Wang, Z. Wang, et al.. CReC: Causal Representation Consistency Network for Anomaly Detection in Surveillance Videos[J]. IEEE Transactions on Image Processing, 2025, 34: 2351-2366.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, H. Wang, Z. Wang, et al. CRCL: Causal Representation Consistency Learning for Anomaly Detection in Surveillance Videos[J]. IEEE Transactions on Image Processing, 2025, 34: 2351-2366.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag ccf">CCF A</span>
               <span class="pub-tag highlight">IF=13.7</span>
             </div>
           </div>
           <div class="pub-item" data-type="survey">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, S. Liu, X. Zhu, et al.. Privacy-Preserving Video Anomaly Detection: A Survey[J]. IEEE Transactions on Neural Networks and Learning Systems, 2025: 1-22.</div>
+            <div class="pub-text">J. Liu, <strong class="author-bold">Y. Liu*</strong>, J. Lin, J. Li, et al. Networking systems for video anomaly detection: A tutorial and survey[J]. ACM Computing Surveys, 2025.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag highlight">IF=8.9</span>
-            </div>
-          </div>
-          <div class="pub-item" data-type="survey">
-            <div class="pub-text">J. Liu, <strong class="author-bold">Y. Liu*</strong>, J. Lin, J. Li, et al.. Networking systems for video anomaly detection: A tutorial and survey[J]. ACM Computing Surveys, 2025.</div>
-            <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=28</span>
-              <span class="pub-tag esi">通讯作者</span>
+              <span class="pub-tag esi"><span data-lang="zh">通讯作者</span><span data-lang="en" class="hidden">Corresponding Author</span></span>
             </div>
           </div>
           <div class="pub-item" data-type="journal">
-            <div class="pub-text">S. Liu*, <strong class="author-bold">Y. Liu*</strong>, Z. Chen, Z. Zhou, Z. Zhao, Y. Xie, W. Li, Z. Gan.. Improving Robotic Grasp Detection Under Sparse Annotations via Grasp Transformer with Pixel-wise Contrastive Learning[J]. IEEE Transactions on Industrial Electronics, 2025.</div>
+            <div class="pub-text">S. Liu*, <strong class="author-bold">Y. Liu*</strong>, Z. Chen, Z. Zhou, Z. Zhao, Y. Xie, W. Li, Z. Gan. Improving Robotic Grasp Detection Under Sparse Annotations via Grasp Transformer with Pixel-wise Contrastive Learning[J]. IEEE Transactions on Industrial Electronics, 2025.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=7.2</span>
-              <span class="pub-tag esi">共一作者</span>
-            </div>
-          </div>
-          <div class="pub-item" data-type="journal">
-            <div class="pub-text">J. Xue, Q. Deng, X. Wu, K. Yao, X. Yin, F. Yu, W. Zhou, Y. Zhong, <strong class="author-bold">Y. Liu*</strong>, D. Yang.. Towards Comprehensive Interactive Change Understanding in Remote Sensing: A Large-scale Dataset and Dual-granularity Enhanced VLM[J]. IEEE Transactions on Geoscience &amp; Remote Sensing, 2025.</div>
-            <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag highlight">IF=8.6</span>
-              <span class="pub-tag esi">通讯作者</span>
-            </div>
-          </div>
-          <div class="pub-item" data-type="journal">
-            <div class="pub-text">D. Yang, et al., <strong class="author-bold">Y. Liu*</strong>, et al.. MedAide: Information Fusion and Anatomy of Medical Intents via LLM-based Agent Collaboration[J]. Information Fusion, 2025.</div>
-            <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag highlight">IF=15.5</span>
-              <span class="pub-tag esi">通讯作者</span>
-            </div>
-          </div>
-          <div class="pub-item" data-type="journal">
-            <div class="pub-text">Z. Li, et al., <strong class="author-bold">Y. Liu*</strong>, et al.. STNMamba: Mamba-based spatial-temporal normality learning for video anomaly detection[J]. IEEE Transactions on Multimedia, 2025.</div>
-            <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag ccf">CCF A</span>
-              <span class="pub-tag highlight">IF=9.7</span>
-              <span class="pub-tag esi">通讯作者</span>
+              <span class="pub-tag esi"><span data-lang="zh">共一作者</span><span data-lang="en" class="hidden">Co-first Author</span></span>
             </div>
           </div>
         </div>
         <div class="pub-year-group" data-year="2024">
           <h3 class="pub-year-title">2024</h3>
           <div class="pub-item" data-type="survey">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al.. Generalized Video Anomaly Event Detection: Systematic Taxonomy and Comparison of Deep Models[J]. ACM Computing Surveys, 2024.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al. Generalized Video Anomaly Event Detection: Systematic Taxonomy and Comparison of Deep Models[J]. ACM Computing Surveys, 2024.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag esi">ESI高被引</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag esi"><span data-lang="zh">ESI高被引</span><span data-lang="en" class="hidden">ESI Highly Cited</span></span>
               <span class="pub-tag highlight">IF=28</span>
             </div>
           </div>
           <div class="pub-item" data-type="journal">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al.. Memory-enhanced Spatial-Temporal Encoding Framework for Industrial Anomaly Detection System[J]. Expert Systems with Applications, 2024.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al. AMP-Net: Appearance-Motion Prototype Network Assisted Automatic Video Anomaly Detection System[J]. IEEE Transactions on Industrial Informatics, 2024, 20(2): 2843-2855.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
+              <span class="pub-tag highlight">IF=9.9</span>
+            </div>
+          </div>
+          <div class="pub-item" data-type="journal">
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al. Memory-enhanced Spatial-Temporal Encoding Framework for Industrial Anomaly Detection System[J]. Expert Systems with Applications, 2024.</div>
+            <div class="pub-tags">
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=7.5</span>
             </div>
           </div>
@@ -163,24 +184,17 @@
         <div class="pub-year-group" data-year="2023">
           <h3 class="pub-year-title">2023</h3>
           <div class="pub-item" data-type="journal">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al.. AMP-Net: Appearance-Motion Prototype Network Assisted Automatic Video Anomaly Detection System[J]. IEEE Transactions on Industrial Informatics, 2023.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al. Stochastic Video Normality Network for Abnormal Event Detection in Surveillance Videos[J]. Knowledge-Based Systems, 2023.</div>
             <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
-              <span class="pub-tag highlight">IF=9.9</span>
-            </div>
-          </div>
-          <div class="pub-item" data-type="journal">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al.. Stochastic Video Normality Network for Abnormal Event Detection in Surveillance Videos[J]. Knowledge-Based Systems, 2023.</div>
-            <div class="pub-tags">
-              <span class="pub-tag">中科院一区TOP</span>
+              <span class="pub-tag"><span data-lang="zh">中科院一区TOP</span><span data-lang="en" class="hidden">CAS Q1 Top</span></span>
               <span class="pub-tag highlight">IF=7.6</span>
             </div>
           </div>
           <div class="pub-item" data-type="conference">
-            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al.. Learning Causality-inspired Representation Consistency for Video Anomaly Detection[C]. ACM Multimedia, 2023.</div>
+            <div class="pub-text"><strong class="author-bold">Y. Liu</strong>, et al. Learning Causality-inspired Representation Consistency for Video Anomaly Detection[C]. ACM Multimedia, 2023.</div>
             <div class="pub-tags">
               <span class="pub-tag ccf">CCF A</span>
-              <span class="pub-tag esi">口头展示</span>
+              <span class="pub-tag esi"><span data-lang="zh">口头展示</span><span data-lang="en" class="hidden">Oral Presentation</span></span>
             </div>
           </div>
         </div>
@@ -190,7 +204,7 @@
 
   <footer class="footer">
     <p>© 2026 EPIC Lab, Tongji University</p>
-    <p style="margin-top:4px;">📧 yangliu25@tongji.edu.cn</p>
+    <p class="footer-contact">📧 yangliu25@tongji.edu.cn</p>
   </footer>
 
   <script src="js/main.js"></script>
@@ -203,8 +217,12 @@
         const buttons = document.querySelectorAll('.filter-btn');
         buttons.forEach(btn => {
           btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
+            buttons.forEach(b => {
+              b.classList.remove('active');
+              b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
             const filter = btn.dataset.filter;
             document.querySelectorAll('.pub-item').forEach(item => {
               if (filter === 'all' || item.dataset.type === filter) {

@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPIC Lab | Tongji University</title>
   <meta name="description" content="EPIC Lab - Embodied Perception & Intelligence Computing, College of Electronics and Information Engineering, Tongji University">
+  <link rel="canonical" href="https://tongji-epic.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EPIC Lab">
+  <meta property="og:title" content="EPIC Lab | Tongji University">
+  <meta property="og:description" content="Embodied Perception & Intelligence Computing at Tongji University">
+  <meta property="og:url" content="https://tongji-epic.github.io/">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
 
@@ -32,10 +39,10 @@
           <span data-lang="en" class="hidden">Activities</span>
         </a>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="navbar-actions">
+        <button type="button" class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-controls="navbarLinks" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
@@ -130,7 +137,7 @@
     <!-- ==========================================
          Team Section
          ========================================== -->
-    <section id="team" style="background:var(--bg-light);">
+    <section id="team" class="section-band-light">
       <div class="section">
         <div class="section-header">
           <h2 class="section-title">
@@ -197,7 +204,7 @@
               <span data-lang="zh">合作老师</span>
               <span data-lang="en" class="hidden">Collaborators</span>
             </span>
-            <h3 class="team-name" style="margin-bottom:12px;">
+            <h3 class="team-name team-name-spaced">
               <span data-lang="zh">合作老师</span>
               <span data-lang="en" class="hidden">Collaborators</span>
             </h3>
@@ -219,8 +226,8 @@
         </div>
 
         <!-- Students Table -->
-        <div style="margin-top:48px;">
-          <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:16px;">
+        <div class="students-section">
+          <h3 class="students-heading">
             <span data-lang="zh">在读学生</span>
             <span data-lang="en" class="hidden">Students</span>
           </h3>
@@ -228,16 +235,16 @@
             <table class="students-table">
               <thead>
                 <tr data-lang="zh">
-                  <th>姓名</th>
-                  <th>年级</th>
-                  <th>学位</th>
-                  <th>状态</th>
+                  <th scope="col">姓名</th>
+                  <th scope="col">年级</th>
+                  <th scope="col">学位</th>
+                  <th scope="col">状态</th>
                 </tr>
                 <tr data-lang="en" class="hidden">
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Degree</th>
-                  <th>Status</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Degree</th>
+                  <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -375,7 +382,7 @@
       <span data-lang="zh">© 2026 同济大学 EPIC Lab</span>
       <span data-lang="en" class="hidden">© 2026 EPIC Lab, Tongji University</span>
     </p>
-    <p style="margin-top:4px;">📧 yangliu25@tongji.edu.cn</p>
+    <p class="footer-contact">📧 yangliu25@tongji.edu.cn</p>
   </footer>
 
   <script src="js/main.js"></script>

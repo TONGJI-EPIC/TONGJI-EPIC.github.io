@@ -107,6 +107,12 @@ a:hover {
   gap: 32px;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .nav-link {
   font-size: 0.95rem;
   font-weight: 500;
@@ -179,6 +185,10 @@ a:hover {
   padding: 80px 24px;
   max-width: var(--max-width);
   margin: 0 auto;
+}
+
+.section-band-light {
+  background: var(--bg-light);
 }
 
 .section-header {
@@ -356,6 +366,10 @@ a:hover {
   margin-bottom: 4px;
 }
 
+.team-name-spaced {
+  margin-bottom: 12px;
+}
+
 .team-affiliation {
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -389,6 +403,16 @@ a:hover {
 }
 
 /* Students Table */
+.students-section {
+  margin-top: 48px;
+}
+
+.students-heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
 .students-table-wrapper {
   overflow-x: auto;
   margin-top: 24px;
@@ -523,6 +547,53 @@ a:hover {
 
 .footer a {
   color: var(--text-secondary);
+}
+
+.footer-contact {
+  margin-top: 4px;
+}
+
+.error-page {
+  text-align: center;
+}
+
+.error-code {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.error-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 8px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.error-link.primary {
+  color: white;
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.error-link.primary:hover {
+  color: white;
+  background: var(--primary-blue-dark);
+  text-decoration: none;
 }
 
 /* ==========================================

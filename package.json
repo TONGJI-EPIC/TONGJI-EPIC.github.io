@@ -2,11 +2,12 @@
   "name": "tongji-epic-site",
   "private": true,
   "scripts": {
-    "dev": "live-server . --host=127.0.0.1 --port=4173 --no-browser",
+    "dev": "python3 -m http.server 4173 --bind 127.0.0.1",
     "serve": "python3 -m http.server 4173 --bind 127.0.0.1",
-    "test": "node --test tests/content.test.mjs"
+    "test": "node --test tests/content.test.mjs",
+    "validate": "html-validate index.html publications.html activities.html 404.html"
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "html-validate": "^10.13.1"
   }
 }

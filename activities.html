@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Activities | EPIC Lab</title>
   <meta name="description" content="Academic activities of EPIC Lab, Tongji University">
+  <link rel="canonical" href="https://tongji-epic.github.io/activities.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EPIC Lab">
+  <meta property="og:title" content="Activities | EPIC Lab">
+  <meta property="og:description" content="Academic activities, workshops, and special issues organized by EPIC Lab">
+  <meta property="og:url" content="https://tongji-epic.github.io/activities.html">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,10 +32,10 @@
           <span data-lang="zh">活动</span><span data-lang="en" class="hidden">Activities</span>
         </a>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="navbar-actions">
+        <button type="button" class="lang-switch" id="langSwitch" title="Switch Language">EN</button>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-controls="navbarLinks" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
@@ -193,7 +201,7 @@
 
   <footer class="footer">
     <p>© 2026 EPIC Lab, Tongji University</p>
-    <p style="margin-top:4px;">📧 yangliu25@tongji.edu.cn</p>
+    <p class="footer-contact">📧 yangliu25@tongji.edu.cn</p>
   </footer>
 
   <script src="js/main.js"></script>

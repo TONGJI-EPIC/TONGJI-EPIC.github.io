@@ -1,0 +1,6 @@
+exclude:
+  - package.json
+  - package-lock.json
+  - tests/
+  - Papers.bib
+  - node_modules/
