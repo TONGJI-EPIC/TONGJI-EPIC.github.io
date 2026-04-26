@@ -88,7 +88,7 @@ test('homepage students table includes a school column in both languages', () =>
 test('homepage student names can optionally link to personal homepages', () => {
   assert.match(
     indexHtml,
-    /<a class="student-name-link" href="https:\/\/jiale-bian\.github\.io\/" target="_blank" rel="noopener">[\s\S]*?<span data-lang="zh">卞佳乐<\/span>[\s\S]*?<span data-lang="en" class="hidden">Jiale Bian<\/span>[\s\S]*?<\/a>/
+    /<a class="student-name-link" href="https:\/\/jiale-bian\.github\.io\/" target="_blank" rel="noopener">[\s\S]*?<span data-lang="zh">卞佳乐<\/span>[\s\S]*?<span data-lang="en" class="hidden">Jiale Bian<\/span>[\s\S]*?<span class="link-icon" aria-hidden="true">🌐<\/span>[\s\S]*?<\/a>/
   );
   assert.match(
     styleCss,
@@ -97,8 +97,13 @@ test('homepage student names can optionally link to personal homepages', () => {
   );
   assert.match(
     styleCss,
+    /\.student-name-link\s+\.link-icon\s*\{[\s\S]*?font-size:\s*0\.85em;/,
+    'linked student names should render a visible web icon element after the name'
+  );
+  assert.doesNotMatch(
+    styleCss,
     /\.student-name-link::after\s*\{[\s\S]*?content:\s*"🌐";/,
-    'linked student names should automatically show the web icon after the name'
+    'linked student names should not rely on CSS-generated text for the web icon'
   );
 });
 
