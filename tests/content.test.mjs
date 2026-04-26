@@ -22,6 +22,13 @@ const htmlPages = [
   { file: '404.html', html: notFoundHtml }
 ];
 
+const getPublicationItem = title => {
+  const publicationItems = publicationsHtml.match(/<div class="pub-item"[\s\S]*?<\/div>\s*<\/div>/g) ?? [];
+  const item = publicationItems.find(publicationItem => publicationItem.includes(title));
+  assert.ok(item, `publication item not found: ${title}`);
+  return item;
+};
+
 test('homepage Chinese copy is localized for key visible text', () => {
   assert.match(indexHtml, /<p class="hero-subtitle">Embodied Perception &amp; Intelligence Computing<\/p>/);
   assert.match(indexHtml, /<p class="hero-subtitle zh-only" data-lang="zh">具身感知与智能计算实验室<\/p>/);
@@ -168,6 +175,7 @@ test('publications page contains the requested papers', () => {
     'Networking Systems for Video Anomaly Detection: A Tutorial and Survey',
     'Improving Robotic Grasp Detection Under Sparse Annotations via Grasp Transformer with Pixel-Wise Contrastive Learning',
     'Toward Comprehensive Interactive Change Understanding in Remote Sensing: A Large-Scale Dataset and Dual-Granularity Enhanced VLM',
+    'Channel-Independence for Traffic Forecasting: A Cascaded Spatio-Temporal MLP Framework',
     'Distributional and Spatial-Temporal Robust Representation Learning for Transportation Activity Recognition',
     'Cross-Modal Attention Fusion of RGB and Skeleton for Multimodal-Driven Video Anomaly Detection'
   ];
@@ -200,6 +208,20 @@ test('publications page contains the requested papers', () => {
     publicationsHtml,
     /Toward Comprehensive Interactive Change Understanding in Remote Sensing: A Large-Scale Dataset and Dual-Granularity Enhanced VLM[\s\S]{0,300}中科院一区TOP[\s\S]{0,120}IF=8.6[\s\S]{0,120}通讯作者/
   );
+  const trafficForecastingItem = getPublicationItem(
+    'Channel-Independence for Traffic Forecasting: A Cascaded Spatio-Temporal MLP Framework'
+  );
+  assert.match(
+    trafficForecastingItem,
+    /IEEE Transactions on Intelligent Transportation Systems, 2026: 1-13\.[\s\S]{0,300}中科院一区TOP[\s\S]{0,220}IF=8\.4/
+  );
+  assert.match(
+    trafficForecastingItem,
+    /Z\. Wang\*, Y\. Nie, <strong class="author-bold">Y\. Liu\*<\/strong>[\s\S]*?P\. Sun\*\./
+  );
+  assert.match(trafficForecastingItem, /通讯作者/);
+  assert.doesNotMatch(trafficForecastingItem, /共一作者|Co-first Author/);
+  assert.doesNotMatch(trafficForecastingItem, /领域顶刊|Top-ranked Publication/);
   assert.match(
     publicationsHtml,
     /Cross-Modal Attention Fusion of RGB and Skeleton for Multimodal-Driven Video Anomaly Detection[\s\S]{0,300}中科院一区TOP[\s\S]{0,120}IF=7.6[\s\S]{0,120}通讯作者/
@@ -214,6 +236,7 @@ test('publications page uses verified formal publication details', () => {
   const expectedDetails = [
     /CRCL: Causal Representation Consistency Learning for Anomaly Detection in Surveillance Videos\[J\]\. IEEE Transactions on Image Processing, 2025, 34: 2351-2366\./,
     /Privacy-Preserving Video Anomaly Detection: A Survey\[J\]\. IEEE Transactions on Neural Networks and Learning Systems, 2026, 37\(1\): 2-21\./,
+    /Channel-Independence for Traffic Forecasting: A Cascaded Spatio-Temporal MLP Framework\[J\]\. IEEE Transactions on Intelligent Transportation Systems, 2026: 1-13\./,
     /Distributional and Spatial-Temporal Robust Representation Learning for Transportation Activity Recognition\[J\]\. Pattern Recognition, 2023, 140: 109568\./,
     /Toward Comprehensive Interactive Change Understanding in Remote Sensing: A Large-Scale Dataset and Dual-Granularity Enhanced VLM\[J\]\. IEEE Transactions on Geoscience and Remote Sensing, 2026, 64: 1-16\./,
     /MedAide: Information Fusion and Anatomy of Medical Intents via LLM-Based Agent Collaboration\[J\]\. Information Fusion, 2026, 127: 103743\./,
@@ -252,6 +275,7 @@ test('Papers.bib uses verified formal publication details', () => {
   const expectedDetails = [
     /title=\{CRCL: Causal Representation Consistency Learning for Anomaly Detection in Surveillance Videos\}/,
     /title=\{Privacy-Preserving Video Anomaly Detection: A Survey\}[\s\S]*?volume=\{37\}[\s\S]*?number=\{1\}[\s\S]*?pages=\{2--21\}[\s\S]*?year=\{2026\}/,
+    /@ARTICLE\{11494223,[\s\S]*?author=\{Wang\*, Zepu and Nie, Yuqi and Liu\*, Yang and Mulvey, John M\. and Poor, H\. Vincent and Boukerche, Azzedine and Nguyen, Nam H\. and Sun\*, Peng\}[\s\S]*?journal=\{IEEE Transactions on Intelligent Transportation Systems\}[\s\S]*?title=\{Channel-Independence for Traffic Forecasting: A Cascaded Spatio-Temporal MLP Framework\}[\s\S]*?pages=\{1-13\}[\s\S]*?doi=\{10\.1109\/TITS\.2026\.3682251\}/,
     /title=\{Distributional and Spatial-Temporal Robust Representation Learning for Transportation Activity Recognition\}[\s\S]*?author=\{Liu, Jing and Liu, Yang and Zhu, Wei and Zhu, Xiaoguang and Song, Liang\}[\s\S]*?journal=\{Pattern Recognition\}[\s\S]*?volume=\{140\}[\s\S]*?pages=\{109568\}[\s\S]*?year=\{2023\}/,
     /title=\{Toward Comprehensive Interactive Change Understanding in Remote Sensing: A Large-Scale Dataset and Dual-Granularity Enhanced VLM\}[\s\S]*?journal=\{IEEE Transactions on Geoscience and Remote Sensing\}[\s\S]*?volume=\{64\}[\s\S]*?pages=\{1--16\}[\s\S]*?year=\{2026\}/,
     /title=\{MedAide: Information Fusion and Anatomy of Medical Intents via LLM-Based Agent Collaboration\}[\s\S]*?journal=\{Information Fusion\}[\s\S]*?volume=\{127\}[\s\S]*?pages=\{103743\}[\s\S]*?year=\{2026\}/,
@@ -305,6 +329,7 @@ test('publication badges include English alternatives for Chinese labels', () =>
     /<span class="pub-tag[^"]*">(中科院一区TOP|通讯作者|共一作者|ESI高被引|口头展示)<\/span>/,
     'Chinese publication badges should not be static text'
   );
+  assert.doesNotMatch(publicationsHtml, /领域顶刊|Top-ranked Publication/);
 });
 
 test('publication badges are not duplicated inside one publication', () => {
@@ -315,6 +340,14 @@ test('publication badges are not duplicated inside one publication', () => {
       .filter(Boolean);
     assert.equal(new Set(labels).size, labels.length, `publication should not repeat badges: ${labels.join(', ')}`);
   });
+});
+
+test('each publication item includes visible label badges', () => {
+  const publicationItemCount = [...publicationsHtml.matchAll(/<div class="pub-item"/g)].length;
+  const tagGroupCount = [...publicationsHtml.matchAll(/<div class="pub-tags">/g)].length;
+
+  assert.ok(publicationItemCount > 0, 'expected publication items');
+  assert.equal(tagGroupCount, publicationItemCount, 'each publication item should include a pub-tags group');
 });
 
 test('publication filters are localized in Chinese and English', () => {
