@@ -264,6 +264,17 @@ a:hover {
   font-style: italic;
 }
 
+.hero-affiliation-link {
+  color: inherit;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.hero-affiliation-link:hover {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}
+
 /* ==========================================
    Cards
    ========================================== */
@@ -442,6 +453,26 @@ a:hover {
 
 .students-table tbody tr:hover {
   background: var(--bg-light);
+}
+
+.student-name-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.student-name-link::after {
+  content: "🌐";
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.student-name-link:hover,
+.student-name-link:focus-visible {
+  color: var(--primary-blue-dark);
+  text-decoration: underline;
 }
 
 .status-badge {
@@ -668,6 +699,14 @@ a:hover {
   margin-bottom: 12px;
 }
 
+.pub-text,
+.activity-detail,
+.activity-role,
+.card-text,
+.team-bio {
+  overflow-wrap: anywhere;
+}
+
 .pub-text .author-bold {
   font-weight: 700;
   color: var(--text-primary);
@@ -746,6 +785,13 @@ a:hover {
   border-color: var(--primary-blue-light);
 }
 
+.activity-item-link,
+.activity-item-link:hover,
+.activity-item-link:focus-visible {
+  color: inherit;
+  text-decoration: none;
+}
+
 .activity-icon {
   font-size: 1.3rem;
   flex-shrink: 0;
@@ -784,11 +830,11 @@ a:hover {
     --nav-height: 56px;
   }
 
-  .navbar-links {
+  .js .navbar-links {
     display: none;
   }
 
-  .navbar-links.mobile-open {
+  .js .navbar-links.mobile-open {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -803,12 +849,12 @@ a:hover {
     box-shadow: var(--shadow-lg);
   }
 
-  .navbar-links.mobile-open .nav-link {
+  .js .navbar-links.mobile-open .nav-link {
     padding: 12px 0;
     border-bottom: 1px solid var(--border-light);
   }
 
-  .navbar-links.mobile-open .nav-link:last-child {
+  .js .navbar-links.mobile-open .nav-link:last-child {
     border-bottom: none;
   }
 
@@ -816,8 +862,41 @@ a:hover {
     display: block;
   }
 
+  .no-js .navbar {
+    height: auto;
+    min-height: var(--nav-height);
+  }
+
+  .no-js .navbar-container {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--nav-height);
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .no-js .navbar-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 18px;
+    padding-top: 8px;
+  }
+
+  .no-js .mobile-menu-btn {
+    display: none;
+  }
+
+  .no-js .main-content {
+    padding-top: calc(var(--nav-height) + 44px);
+  }
+
   .hero {
     padding: 80px 20px 60px;
+  }
+
+  .no-js .hero {
+    padding-top: 128px;
   }
 
   .hero-title {
@@ -858,8 +937,66 @@ a:hover {
   }
 
   .students-table-wrapper {
-    margin: 0 -20px;
-    padding: 0 20px;
+    margin: 0;
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .students-table,
+  .students-table tbody,
+  .students-table tr,
+  .students-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .students-table {
+    border-collapse: separate;
+  }
+
+  .students-table thead {
+    display: none;
+  }
+
+  .students-table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .students-table tr {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    padding: 8px 14px;
+  }
+
+  .students-table tbody tr:hover {
+    background: var(--bg-card);
+  }
+
+  .students-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    text-align: right;
+  }
+
+  .students-table td:not(:last-child) {
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .students-table td::before {
+    content: attr(data-label-zh);
+    flex: 0 0 auto;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: left;
+  }
+
+  [lang="en"] .students-table td::before {
+    content: attr(data-label-en);
   }
 }
 

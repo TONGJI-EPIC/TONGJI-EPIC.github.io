@@ -10,12 +10,32 @@
      Language Switching
      ========================================== */
   const DEFAULT_LANG = 'zh';
-  let currentLang = localStorage.getItem('epic-lang') || DEFAULT_LANG;
+
+  function getStoredLanguage() {
+    try {
+      return localStorage.getItem('epic-lang');
+    } catch {
+      return null;
+    }
+  }
+
+  function storeLanguage(lang) {
+    try {
+      localStorage.setItem('epic-lang', lang);
+    } catch {
+      // Keep navigation and language toggles working when storage is unavailable.
+    }
+  }
+
+  let currentLang = getStoredLanguage() || DEFAULT_LANG;
+
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
 
   function setLanguage(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
-    localStorage.setItem('epic-lang', lang);
+    storeLanguage(lang);
 
     // Update toggle button text
     const btn = document.getElementById('langSwitch');
