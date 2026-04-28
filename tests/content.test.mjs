@@ -39,6 +39,39 @@ test('homepage Chinese copy is localized for key visible text', () => {
   assert.match(indexHtml, /Prof\. Peng Sun/);
 });
 
+test('homepage hero presents lab identity with visual proof points', () => {
+  assert.match(indexHtml, /<div class="hero-layout">/, 'hero should use a richer two-column layout');
+  assert.match(indexHtml, /<div class="hero-identity">[\s\S]*?<h1 class="hero-title">EPIC <span class="lab-highlight">Lab<\/span><\/h1>/, 'hero should group the lab identity as a distinct block');
+  assert.match(indexHtml, /<div class="hero-name-group">[\s\S]*?<p class="hero-subtitle">Embodied Perception &amp; Intelligence Computing<\/p>[\s\S]*?<p class="hero-subtitle zh-only" data-lang="zh">具身感知与智能计算实验室<\/p>[\s\S]*?<\/div>/, 'hero should present English and Chinese names as one name group');
+  assert.match(indexHtml, /<p class="hero-description hero-lead">/, 'hero research positioning should be styled as the lead sentence');
+  assert.doesNotMatch(indexHtml, /Embodied AI Research Group/, 'hero should not include generic decorative research-group labels');
+  assert.doesNotMatch(indexHtml, /class="hero-kicker"/, 'hero should not show a decorative kicker above the lab name');
+  assert.match(indexHtml, /<ul class="hero-proof-grid">/, 'hero should include visible proof-point metrics');
+  ['4 研究方向', '16 代表论文', '7 学术活动', '14 在读学生'].forEach(label => {
+    assert.match(indexHtml, new RegExp(`data-metric="${label}"`), `hero should include metric: ${label}`);
+  });
+  [
+    ['4 研究方向', '#research'],
+    ['16 代表论文', 'publications.html'],
+    ['7 学术活动', 'activities.html'],
+    ['14 在读学生', '#students']
+  ].forEach(([metric, href]) => {
+    assert.match(
+      indexHtml,
+      new RegExp(`data-metric="${metric}"[\\s\\S]*?<a class="hero-proof-link" href="${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`),
+      `hero metric should link to ${href}: ${metric}`
+    );
+  });
+  assert.match(indexHtml, /<div class="students-section" id="students">/, 'student proof link should target the students table section');
+  assert.match(indexHtml, /<aside class="hero-visual" aria-label="EPIC Lab research map">/, 'hero should include a research visual panel');
+  assert.match(indexHtml, /class="hero-visual-node node-perception"[\s\S]*?Perception/, 'research visual should show perception as a first-class node');
+  assert.match(indexHtml, /class="hero-visual-node node-intelligence"[\s\S]*?Intelligence/, 'research visual should show intelligence as a first-class node');
+  assert.match(indexHtml, /class="hero-visual-node node-systems"[\s\S]*?Systems/, 'research visual should show systems as a first-class node');
+  assert.match(indexHtml, /<div class="hero-actions">[\s\S]*?href="publications\.html"[\s\S]*?href="#join"/, 'hero should provide primary routes to publications and recruiting');
+  assert.match(styleCss, /\.hero-proof-grid\s*\{[\s\S]*?border-top: 1px solid rgba\(26, 115, 232, 0\.18\);[\s\S]*?border-bottom: 1px solid rgba\(26, 115, 232, 0\.18\);/, 'hero proof metrics should render as a lightweight strip');
+  assert.match(styleCss, /\.hero-proof\s*\{[\s\S]*?background: transparent;/, 'hero proof items should not render as separate heavy cards');
+});
+
 test('homepage collaborator links with personal homepages show a web icon', () => {
   assert.match(
     indexHtml,
@@ -404,8 +437,8 @@ test('site pages cache-bust shared CSS after icon rendering changes', () => {
   htmlPages.forEach(({ file, html }) => {
     assert.match(
       html,
-      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260426-inline-icons">/,
-      `${file} should load the icon-safe stylesheet URL`
+      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260428-hero-left">/,
+      `${file} should load the hero-left stylesheet URL`
     );
   });
 });
