@@ -1125,6 +1125,63 @@ a:hover {
   margin-top: 6px;
 }
 
+.editorial-service-card {
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #f7fbff 100%);
+  border-color: rgba(26, 115, 232, 0.18);
+}
+
+.service-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(26, 115, 232, 0.2);
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.activity-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-bottom: 4px;
+}
+
+.activity-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.activity-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: #e6f4ea;
+  color: #137333;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.activity-badge.ccf {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+}
+
+.activity-link-label {
+  display: inline-flex;
+  margin-top: 8px;
+}
+
 /* ==========================================
    Responsive Design
    ========================================== */
@@ -1413,14 +1470,81 @@ a:hover {
 
   .hero-visual {
     min-height: 340px;
+    display: grid;
+    grid-template-areas:
+      "visual-header"
+      "visual-core"
+      "visual-perception"
+      "visual-intelligence"
+      "visual-systems"
+      "visual-footer";
+    gap: 12px;
+    padding: 22px 20px;
+  }
+
+  .hero-visual::before {
+    inset: 62px 18px 68px;
+  }
+
+  .hero-visual-header,
+  .hero-visual-footer {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
   }
 
   .hero-visual-header {
+    grid-area: visual-header;
     font-size: 0.68rem;
   }
 
+  .hero-visual-footer {
+    grid-area: visual-footer;
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  .hero-orbit,
+  .hero-visual-track {
+    display: none;
+  }
+
+  .hero-visual-core {
+    grid-area: visual-core;
+    position: relative;
+    left: auto;
+    top: auto;
+    justify-self: center;
+    width: 74px;
+    height: 74px;
+    font-size: 0.96rem;
+    transform: none;
+  }
+
   .hero-visual-node {
-    width: 128px;
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    padding: 11px 13px;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .node-perception {
+    grid-area: visual-perception;
+  }
+
+  .node-intelligence {
+    grid-area: visual-intelligence;
+  }
+
+  .node-systems {
+    grid-area: visual-systems;
   }
 
   .hero-visual-node strong {

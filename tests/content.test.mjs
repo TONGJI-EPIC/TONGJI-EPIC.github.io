@@ -47,14 +47,14 @@ test('homepage hero presents lab identity with visual proof points', () => {
   assert.doesNotMatch(indexHtml, /Embodied AI Research Group/, 'hero should not include generic decorative research-group labels');
   assert.doesNotMatch(indexHtml, /class="hero-kicker"/, 'hero should not show a decorative kicker above the lab name');
   assert.match(indexHtml, /<ul class="hero-proof-grid">/, 'hero should include visible proof-point metrics');
-  ['4 研究方向', '16 代表论文', '7 学术活动', '14 在读学生'].forEach(label => {
+  ['4 研究方向', '16 代表论文', '8 学术活动', '16 在读学生'].forEach(label => {
     assert.match(indexHtml, new RegExp(`data-metric="${label}"`), `hero should include metric: ${label}`);
   });
   [
     ['4 研究方向', '#research'],
     ['16 代表论文', 'publications.html'],
-    ['7 学术活动', 'activities.html'],
-    ['14 在读学生', '#students']
+    ['8 学术活动', 'activities.html'],
+    ['16 在读学生', '#students']
   ].forEach(([metric, href]) => {
     assert.match(
       indexHtml,
@@ -63,10 +63,12 @@ test('homepage hero presents lab identity with visual proof points', () => {
     );
   });
   assert.match(indexHtml, /<div class="students-section" id="students">/, 'student proof link should target the students table section');
-  assert.match(indexHtml, /<aside class="hero-visual" aria-label="EPIC Lab research map">/, 'hero should include a research visual panel');
-  assert.match(indexHtml, /class="hero-visual-node node-perception"[\s\S]*?Perception/, 'research visual should show perception as a first-class node');
-  assert.match(indexHtml, /class="hero-visual-node node-intelligence"[\s\S]*?Intelligence/, 'research visual should show intelligence as a first-class node');
-  assert.match(indexHtml, /class="hero-visual-node node-systems"[\s\S]*?Systems/, 'research visual should show systems as a first-class node');
+  assert.match(indexHtml, /<aside class="hero-visual" aria-labelledby="heroVisualTitle">/, 'hero should include a labelled research visual panel');
+  assert.match(indexHtml, /<span id="heroVisualTitle">[\s\S]*?<span data-lang="zh">EPIC Lab 研究图谱<\/span>[\s\S]*?<span data-lang="en" class="hidden">EPIC Lab Research Map<\/span>[\s\S]*?<\/span>/, 'research visual title should be localized');
+  assert.match(indexHtml, /class="hero-visual-node node-perception"[\s\S]*?<strong data-lang="zh">感知<\/strong>[\s\S]*?<strong data-lang="en" class="hidden">Perception<\/strong>[\s\S]*?<span data-lang="zh">视频异常检测<\/span>[\s\S]*?<span data-lang="en" class="hidden">Video Anomaly<\/span>/, 'research visual should localize the perception node');
+  assert.match(indexHtml, /class="hero-visual-node node-intelligence"[\s\S]*?<strong data-lang="zh">智能<\/strong>[\s\S]*?<strong data-lang="en" class="hidden">Intelligence<\/strong>[\s\S]*?<span data-lang="zh">多模态模型<\/span>[\s\S]*?<span data-lang="en" class="hidden">Multimodal Models<\/span>/, 'research visual should localize the intelligence node');
+  assert.match(indexHtml, /class="hero-visual-node node-systems"[\s\S]*?<strong data-lang="zh">系统<\/strong>[\s\S]*?<strong data-lang="en" class="hidden">Systems<\/strong>[\s\S]*?<span data-lang="zh">工业与自主系统<\/span>[\s\S]*?<span data-lang="en" class="hidden">Industry &amp; Autonomy<\/span>/, 'research visual should localize the systems node');
+  assert.match(indexHtml, /<div class="hero-visual-footer">[\s\S]*?<span data-lang="zh">具身多媒体智能<\/span>[\s\S]*?<span data-lang="en" class="hidden">Embodied multimedia intelligence<\/span>[\s\S]*?<\/div>/, 'research visual footer should be localized');
   assert.match(indexHtml, /<div class="hero-actions">[\s\S]*?href="publications\.html"[\s\S]*?href="#join"/, 'hero should provide primary routes to publications and recruiting');
   assert.match(styleCss, /\.hero-proof-grid\s*\{[\s\S]*?border-top: 1px solid rgba\(26, 115, 232, 0\.18\);[\s\S]*?border-bottom: 1px solid rgba\(26, 115, 232, 0\.18\);/, 'hero proof metrics should render as a lightweight strip');
   assert.match(styleCss, /\.hero-proof\s*\{[\s\S]*?background: transparent;/, 'hero proof items should not render as separate heavy cards');
@@ -94,11 +96,11 @@ test('homepage collaborator links with personal homepages show a web icon', () =
 test('homepage students are ordered by degree priority, then year, school priority, and surname in both languages', () => {
   assert.match(
     indexHtml,
-    /郭俊岑[\s\S]*武靖一[\s\S]*杨浩[\s\S]*刘普俊[\s\S]*孙鑫伟[\s\S]*左为[\s\S]*黄涵[\s\S]*卞佳乐[\s\S]*冯文欣[\s\S]*文杰[\s\S]*涂妍静[\s\S]*寇筱然[\s\S]*余政希[\s\S]*周晋煊/
+    /郭俊岑[\s\S]*武婧一[\s\S]*杨浩[\s\S]*刘普俊[\s\S]*孙鑫伟[\s\S]*左为[\s\S]*黄涵[\s\S]*卞佳乐[\s\S]*冯文欣[\s\S]*文杰[\s\S]*涂妍静[\s\S]*寇筱然[\s\S]*余政希[\s\S]*赵冠维[\s\S]*周晋煊[\s\S]*杨涵/
   );
   assert.match(
     indexHtml,
-    /Juncen Guo[\s\S]*Jingyi Wu[\s\S]*Hao Yang[\s\S]*Pujun Liu[\s\S]*Xinwei Sun[\s\S]*Wei Zuo[\s\S]*Han Huang[\s\S]*Jiale Bian[\s\S]*Wenxin Feng[\s\S]*Jie Wen[\s\S]*Yanjing Tu[\s\S]*Xiaoran Kou[\s\S]*Zhengxi Yu[\s\S]*Jinxuan Zhou/
+    /Juncen Guo[\s\S]*Jingyi Wu[\s\S]*Hao Yang[\s\S]*Pujun Liu[\s\S]*Xinwei Sun[\s\S]*Wei Zuo[\s\S]*Han Huang[\s\S]*Jiale Bian[\s\S]*Wenxin Feng[\s\S]*Jie Wen[\s\S]*Yanjing Tu[\s\S]*Xiaoran Kou[\s\S]*Zhengxi Yu[\s\S]*Guanwei Zhao[\s\S]*Jinxuan Zhou[\s\S]*Han Yang/
   );
   assert.match(
     indexHtml,
@@ -127,7 +129,7 @@ test('homepage students table includes a school column in both languages', () =>
   );
   assert.match(
     indexHtml,
-    /武靖一[\s\S]{0,500}<td data-label-zh="学校" data-label-en="School">[\s\S]*?<span data-lang="zh">复旦大学<\/span>[\s\S]*?<span data-lang="en" class="hidden">Fudan University<\/span>/
+    /武婧一[\s\S]{0,500}<td data-label-zh="学校" data-label-en="School">[\s\S]*?<span data-lang="zh">复旦大学<\/span>[\s\S]*?<span data-lang="en" class="hidden">Fudan University<\/span>/
   );
 });
 
@@ -135,6 +137,10 @@ test('homepage student names can optionally link to personal homepages', () => {
   assert.match(
     indexHtml,
     /<a class="student-name-link" href="https:\/\/jiale-bian\.github\.io\/" target="_blank" rel="noopener">[\s\S]*?<span data-lang="zh">卞佳乐<\/span>[\s\S]*?<span data-lang="en" class="hidden">Jiale Bian<\/span>[\s\S]*?<span class="link-icon" aria-hidden="true">🌐<\/span>[\s\S]*?<\/a>/
+  );
+  assert.match(
+    indexHtml,
+    /<a class="student-name-link" href="https:\/\/yanghan0316-cloud\.github\.io\/Han_Yang\/" target="_blank" rel="noopener">[\s\S]*?<span data-lang="zh">杨涵<\/span>[\s\S]*?<span data-lang="en" class="hidden">Han Yang<\/span>[\s\S]*?<span class="link-icon" aria-hidden="true">🌐<\/span>[\s\S]*?<\/a>/
   );
   assert.match(
     styleCss,
@@ -200,6 +206,27 @@ test('activities special issues show key submission information', () => {
   assert.match(
     activitiesHtml,
     /Open for submissions[\s\S]*?Submission deadline[\s\S]*?Ongoing[\s\S]*?Journal Impact Factor[\s\S]*?3\.0 \(2024\)[\s\S]*?Submission to first decision \(median\)[\s\S]*?2 days/
+  );
+});
+
+test('activities include editorial board service', () => {
+  assert.match(
+    activitiesHtml,
+    /<span data-lang="zh">学术服务 \(Academic Service\)<\/span>[\s\S]*?<a class="activity-item activity-item-link editorial-service-card" href="https:\/\/link\.springer\.com\/journal\/10791\/editorial-board" target="_blank" rel="noopener">[\s\S]*?<span class="service-mark" aria-hidden="true">DC<\/span>[\s\S]*?<span>Discover Computing<\/span>[\s\S]*?<span class="activity-badge">SCI<\/span>[\s\S]*?<span class="activity-badge ccf">CCF C<\/span>[\s\S]*?担任 Editorial Member[\s\S]*?查看 Editorial Board Members →[\s\S]*?<\/a>/
+  );
+  assert.doesNotMatch(
+    activitiesHtml,
+    /<span data-lang="zh">编委 \(Editorial Boards\)<\/span>[\s\S]*?编委（Editorial Member）/
+  );
+  assert.match(
+    styleCss,
+    /\.editorial-service-card\s*\{[\s\S]*?background:\s*linear-gradient\(135deg, var\(--bg-card\) 0%, #f7fbff 100%\);/,
+    'editorial service should have a distinct but restrained card treatment'
+  );
+  assert.match(
+    styleCss,
+    /\.activity-badge\.ccf\s*\{[\s\S]*?color:\s*var\(--primary-blue\);/,
+    'CCF C should render as a compact badge instead of repeated prose'
   );
 });
 
@@ -437,8 +464,8 @@ test('site pages cache-bust shared CSS after icon rendering changes', () => {
   htmlPages.forEach(({ file, html }) => {
     assert.match(
       html,
-      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260428-hero-left">/,
-      `${file} should load the hero-left stylesheet URL`
+      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260428-mobile-map">/,
+      `${file} should load the mobile-map stylesheet URL`
     );
   });
 });
@@ -483,6 +510,10 @@ test('mobile layout supports long text and student card labels', () => {
   assert.match(styleCss, /\.pub-text,[\s\S]*?overflow-wrap: anywhere;/, 'publication text should wrap long tokens on mobile');
   assert.match(styleCss, /\.students-table td::before\s*\{[\s\S]*?content: attr\(data-label-zh\);/, 'student cards should show Chinese field labels');
   assert.match(styleCss, /\[lang="en"\]\s+\.students-table td::before\s*\{[\s\S]*?content: attr\(data-label-en\);/, 'student cards should show English field labels');
+  assert.match(styleCss, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.hero-visual\s*\{[\s\S]*?display: grid;[\s\S]*?grid-template-areas:/, 'mobile research map should use a flow layout instead of fixed absolute node placement');
+  assert.match(styleCss, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.hero-visual-track\s*\{[\s\S]*?display: none;/, 'mobile research map should hide connector lines that collide with compact nodes');
+  assert.match(styleCss, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.hero-visual-node\s*\{[\s\S]*?position: relative;[\s\S]*?width: 100%;/, 'mobile research nodes should occupy stable rows');
+  assert.match(styleCss, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.hero-visual-core\s*\{[\s\S]*?position: relative;[\s\S]*?transform: none;/, 'mobile research map core should not overlap absolute-positioned nodes');
 
   const studentCells = [...indexHtml.matchAll(/<tbody>[\s\S]*?<\/tbody>/g)]
     .flatMap(match => [...match[0].matchAll(/<td\b[^>]*>/g)].map(cell => cell[0]));
