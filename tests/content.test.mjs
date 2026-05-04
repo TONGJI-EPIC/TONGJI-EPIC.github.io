@@ -47,13 +47,13 @@ test('homepage hero presents lab identity with visual proof points', () => {
   assert.doesNotMatch(indexHtml, /Embodied AI Research Group/, 'hero should not include generic decorative research-group labels');
   assert.doesNotMatch(indexHtml, /class="hero-kicker"/, 'hero should not show a decorative kicker above the lab name');
   assert.match(indexHtml, /<ul class="hero-proof-grid">/, 'hero should include visible proof-point metrics');
-  ['4 研究方向', '16 代表论文', '8 学术活动', '16 在读学生'].forEach(label => {
+  ['4 研究方向', '16 代表论文', '8 活动与服务', '16 在读学生'].forEach(label => {
     assert.match(indexHtml, new RegExp(`data-metric="${label}"`), `hero should include metric: ${label}`);
   });
   [
     ['4 研究方向', '#research'],
     ['16 代表论文', 'publications.html'],
-    ['8 学术活动', 'activities.html'],
+    ['8 活动与服务', 'activities.html'],
     ['16 在读学生', '#students']
   ].forEach(([metric, href]) => {
     assert.match(
@@ -212,16 +212,29 @@ test('activities special issues show key submission information', () => {
 test('activities include editorial board service', () => {
   assert.match(
     activitiesHtml,
-    /<span data-lang="zh">学术服务 \(Academic Service\)<\/span>[\s\S]*?<a class="activity-item activity-item-link editorial-service-card" href="https:\/\/link\.springer\.com\/journal\/10791\/editorial-board" target="_blank" rel="noopener">[\s\S]*?<span class="service-mark" aria-hidden="true">DC<\/span>[\s\S]*?<span>Discover Computing<\/span>[\s\S]*?<span class="activity-badge">SCI<\/span>[\s\S]*?<span class="activity-badge ccf">CCF C<\/span>[\s\S]*?担任 Editorial Member[\s\S]*?查看 Editorial Board Members →[\s\S]*?<\/a>/
+    /<h2 class="section-title">[\s\S]*?<span data-lang="zh">学术活动与服务<\/span>[\s\S]*?<span data-lang="en" class="hidden">Academic Activities &amp; Service<\/span>[\s\S]*?<\/h2>/
+  );
+  assert.match(
+    activitiesHtml,
+    /<span data-lang="zh">组织与参与的学术会议、研讨会、专刊与学术服务<\/span>[\s\S]*?<span data-lang="en" class="hidden">Conferences, workshops, special issues, and academic service organized or participated<\/span>/
+  );
+  assert.match(
+    activitiesHtml,
+    /<span data-lang="zh">学术服务 \(Academic Service\)<\/span>[\s\S]*?<a class="activity-item activity-item-link" href="https:\/\/link\.springer\.com\/journal\/10791\/editorial-board" target="_blank" rel="noopener">[\s\S]*?<span class="activity-icon">✦<\/span>[\s\S]*?<span>Discover Computing<\/span>[\s\S]*?<span class="activity-badge">SCI<\/span>[\s\S]*?<span class="activity-badge ccf">CCF C<\/span>[\s\S]*?<span data-lang="zh">编委（Editorial Member）<\/span>[\s\S]*?<span data-lang="en" class="hidden">Editorial Member<\/span>[\s\S]*?Editorial Board Members[\s\S]*?<\/a>/
   );
   assert.doesNotMatch(
     activitiesHtml,
     /<span data-lang="zh">编委 \(Editorial Boards\)<\/span>[\s\S]*?编委（Editorial Member）/
   );
-  assert.match(
+  assert.doesNotMatch(
     styleCss,
-    /\.editorial-service-card\s*\{[\s\S]*?background:\s*linear-gradient\(135deg, var\(--bg-card\) 0%, #f7fbff 100%\);/,
-    'editorial service should have a distinct but restrained card treatment'
+    /\.editorial-service-card\s*\{/,
+    'editorial service should use the normal activity card instead of a standalone promotional treatment'
+  );
+  assert.doesNotMatch(
+    styleCss,
+    /\.service-mark\s*\{/,
+    'editorial service should not introduce a one-off journal mark'
   );
   assert.match(
     styleCss,
@@ -460,12 +473,12 @@ test('site pages include canonical, favicon, and social preview metadata', () =>
   });
 });
 
-test('site pages cache-bust shared CSS after icon rendering changes', () => {
+test('site pages cache-bust shared CSS after activity service changes', () => {
   htmlPages.forEach(({ file, html }) => {
     assert.match(
       html,
-      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260428-mobile-map">/,
-      `${file} should load the mobile-map stylesheet URL`
+      /<link rel="stylesheet" href="\/?css\/style\.css\?v=20260504-activity-service">/,
+      `${file} should load the activity-service stylesheet URL`
     );
   });
 });

@@ -1125,26 +1125,6 @@ a:hover {
   margin-top: 6px;
 }
 
-.editorial-service-card {
-  align-items: center;
-  background: linear-gradient(135deg, var(--bg-card) 0%, #f7fbff 100%);
-  border-color: rgba(26, 115, 232, 0.18);
-}
-
-.service-mark {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(26, 115, 232, 0.2);
-  background: var(--primary-blue-light);
-  color: var(--primary-blue);
-  display: grid;
-  place-items: center;
-  font-size: 0.9rem;
-  font-weight: 800;
-}
-
 .activity-title-row {
   display: flex;
   align-items: center;
@@ -1175,11 +1155,6 @@ a:hover {
 .activity-badge.ccf {
   background: var(--primary-blue-light);
   color: var(--primary-blue);
-}
-
-.activity-link-label {
-  display: inline-flex;
-  margin-top: 8px;
 }
 
 /* ==========================================
